@@ -19,7 +19,8 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "monospace" :size 14)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13))
+      ;; doom-variable-pitch-font (font-spec :family "sans" :size 13)
+      )
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -203,8 +204,10 @@
 ;; https://github.com/emacs-helm/helm-org/pull/9
 ;; This allows inserting links based on unique IDs if org-id-link-to-org-use-id is set to t.
 (use-package! org-id)
+;;TODO do i still need this for doom-emacs?
 (setq org-id-link-to-org-use-id t)
 ;; update id file on startup
+;; The .orgids file is in the directory set by `org-directory'
 (org-id-update-id-locations '("~/dropbox/textnotes/machine learning/notes-machine-learning.org"
                                   "~/dropbox/textnotes/machine learning/notes-machine-learning-projects.org"
                                   "~/dropbox/org-roam/20200610171705-nlp_topic_modeling.org"

@@ -199,3 +199,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;;REVIEW temporal workaround for visual line navigation, track issue https://github.com/hlissner/doom-emacs/issues/401
+(setq evil-respect-visual-line-mode t)
