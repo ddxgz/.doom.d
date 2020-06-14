@@ -1,7 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
-;; refresh' after modifying this file!
+;; sync' after modifying this file!
 
 
 ;; These are used for a number of things, particularly for GPG configuration,
@@ -30,28 +30,30 @@
 
 ;; If you intend to use org, it is recommended you change this!
 (setq org-directory "~/Dropbox/Textnotes/")
-(setq org-roam-directory "~/Dropbox/Textnotes/org-roam")
 
 ;; If you want to change the style of line numbers, change this to `relative' or
 ;; `nil' to disable it:
 (setq display-line-numbers-type 'relative)
 
 
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
-;; - `use-package' for configuring packages
+;; - `use-package!' for configuring packages
 ;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', where Emacs
-;;   looks when you load packages with `require' or `use-package'.
+;; - `add-load-path!' for adding directories to the `load-path', relative to
+;;   this file. Emacs searches the `load-path' when you load packages with
+;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
 ;;
 ;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
+;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
 ;; This will open documentation for it, including demos of how they are used.
 ;;
-;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
+;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
 
 ;;;;
 
@@ -67,9 +69,13 @@
 ;; (global-set-key (kbd "C-x t d") 'downcase-word)
 ;; (global-set-key (kbd "C-x t c") 'capitalize-word)
 ;;
+(map! :map org-mode-map
+      "C-c l" #'org-store-link)
+
 (map! :leader
       :desc "Comment line" "c l" #'comment-line
       :desc "Copy and comment line" "c y" #'evilnc-copy-and-comment-lines
+      :desc "Kill buffer and close window" "w x" #'kill-buffer-and-window
       )
 
 
@@ -137,8 +143,8 @@
 
 
 (custom-set-faces!
- '(org-roam-link :foreground "salmon")
- '(org-roam-link-current :foreground "salmon"))
+ '(org-roam-link :underline t :weight bold :foreground "salmon")
+ '(org-roam-link-current :underline t :weight bold :foreground "salmon"))
 
 
 (setq org-capture-templates
@@ -198,6 +204,30 @@
                   )
     )
 
+(use-package! org-roam
+    :custom
+    (org-roam-directory "~/Dropbox/Textnotes/")
+    (org-roam-index-file "~/Dropbox/Textnotes/org-roam/index.org")
+    ;; (org-roam-link-title-format "[[%s]]")
+    (org-roam-tag-sources '(prop last-directory))
+    (org-roam-capture-templates '(("d" "default" plain (function org-roam--capture-get-point)
+                                 "%?"
+                                 :file-name "org-roam/%<%Y%m%d%H%M%S>-${slug}"
+                                 :head "#+title: ${title}\n
+                                        #+roam_alias:\n#+roam_tags:\n"
+                                 :unnarrowed t)))
+    (org-roam-ref-capture-templates
+          '(("r" "ref" plain (function org-roam-capture--get-point)
+             "%?"
+             :file-name "webpages/${slug}"
+             :head "#+ROAM_KEY: ${ref}
+    #+TITLE: ${title}
+
+    - source :: ${ref}"
+             :unnarrowed t)))
+    )
+
+
 
 ;; use org-id for store-link, ref to
 ;; https://stackoverflow.com/questions/27132422/reference-unique-id-across-emacs-org-mode-files
@@ -208,8 +238,7 @@
 (setq org-id-link-to-org-use-id t)
 ;; update id file on startup
 ;; The .orgids file is in the directory set by `org-directory'
-(org-id-update-id-locations '("~/dropbox/textnotes/machine learning/notes-machine-learning.org"
-                                  "~/dropbox/textnotes/machine learning/notes-machine-learning-projects.org"
-                                  "~/dropbox/org-roam/20200610171705-nlp_topic_modeling.org"
-                                  ))
-
+;; (org-id-update-id-locations '("~/dropbox/textnotes/machine learning/notes-machine-learning.org"
+;;                                   "~/dropbox/textnotes/machine learning/notes-machine-learning-projects.org"
+;;                                   "~/dropbox/org-roam/20200610171705-nlp_topic_modeling.org"
+;;                                   ))
