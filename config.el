@@ -57,7 +57,7 @@
 
 ;;;;
 
-(define-key evil-insert-state-map (kbd "C-d") 'evil-delete-char)
+(map! (:map evil-org-mode-map :i "C-d" #'evil-delete-char))
 
 ;; for upcase and downcase
 ;; to set it to only in text mode
@@ -213,17 +213,13 @@
     (org-roam-capture-templates '(("d" "default" plain (function org-roam--capture-get-point)
                                  "%?"
                                  :file-name "org-roam/%<%Y%m%d%H%M%S>-${slug}"
-                                 :head "#+title: ${title}\n
-                                        #+roam_alias:\n#+roam_tags:\n"
+                                 :head "#+title: ${title}\n#+roam_alias:\n#+roam_tags:\n"
                                  :unnarrowed t)))
     (org-roam-ref-capture-templates
           '(("r" "ref" plain (function org-roam-capture--get-point)
              "%?"
              :file-name "webpages/${slug}"
-             :head "#+ROAM_KEY: ${ref}
-    #+TITLE: ${title}
-
-    - source :: ${ref}"
+             :head "#+ROAM_KEY: ${ref}\n#+TITLE: ${title}\n\n- source :: ${ref}"
              :unnarrowed t)))
     )
 
