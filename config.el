@@ -58,6 +58,8 @@
 ;;;;
 
 (map! (:map evil-org-mode-map :i "C-d" #'evil-delete-char))
+;; REVIEW when evil-respect-visual-line-mode improved
+(map! (:map evil-org-mode-map :n "C-c v" #'evil-visual-screen-line))
 
 ;; for upcase and downcase
 ;; to set it to only in text mode
@@ -228,6 +230,11 @@
     )
 
 
+(sp-local-pair 'org-mode "=" "=")
+(sp-local-pair 'org-mode "~" "~")
+(sp-local-pair 'org-mode "/" "/")
+(sp-local-pair 'org-mode "*" "*")
+;; (sp-local-pair 'org-mode "_" "_")
 
 ;; use org-id for store-link, ref to
 ;; https://stackoverflow.com/questions/27132422/reference-unique-id-across-emacs-org-mode-files
@@ -242,3 +249,12 @@
 ;;                                   "~/dropbox/textnotes/machine learning/notes-machine-learning-projects.org"
 ;;                                   "~/dropbox/org-roam/20200610171705-nlp_topic_modeling.org"
 ;;                                   ))
+
+;; have completion when insert link of id:
+;; source: https://emacs.stackexchange.com/questions/12391/insert-org-id-link-at-point-via-outline-path-completion
+(defun org-id-complete-link (&optional arg)
+  "Create an id: link using completion"
+  (concat "id:"
+          (org-id-get-with-outline-path-completion)))
+(org-link-set-parameters "id"
+                         :complete 'org-id-complete-link)
