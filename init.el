@@ -79,7 +79,7 @@
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
-       ;; spell             ; tasing you for misspelling mispelling
+       spell             ; tasing you for misspelling mispelling
        ;; grammar           ; tasing grammar mistake every you make
 
        :tools
@@ -201,4 +201,4 @@
  )
 
 ;;REVIEW temporal workaround for visual line navigation, track issue https://github.com/hlissner/doom-emacs/issues/401
-(setq evil-respect-visual-line-mode t)
+(setq evil-respect-visual-line-mode nil)
