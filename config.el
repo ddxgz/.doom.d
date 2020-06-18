@@ -177,6 +177,8 @@
           ;; :created t        ; properties
           )
 
+        ("c" "Card" entry (file "~/Dropbox/Textnotes/cards.org")
+          "* %? \n:PROPERTIES:\n:Created: %T\n:CreatedFrom:  %a\n:END:\n:Ref:\n:END:\n")
         ;; ("j" "Journal" entry (file+datetree "~/Dropbox/journal.org")
         ;;  "* %?\nEntered on %U\n  %i\n  %a")
         ;; ("s" "Screencast" entry (file "~/Dropbox/Textnotes/screencastnotes.org")
@@ -196,7 +198,7 @@
 (use-package! deft
     ;; :bind ("C-c n d" . deft)
     ;; :commands (deft)
-    :config (setq deft-directory "~/Dropbox/org-roam/"
+    :config (setq deft-directory "~/Dropbox/Textnotes/"
                   deft-recursive t
                   ;; deft-extensions '("md" "org")
                   ;; deft-use-filter-string-for-filename t
@@ -204,6 +206,8 @@
                   )
     )
 
+;; REVIEW when the option added by roam https://github.com/org-roam/org-roam/issues/507
+(setq org-roam-open-buffer-on-find-file nil)
 (use-package! org-roam
     :custom
     (org-roam-directory "~/Dropbox/Textnotes/")
