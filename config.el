@@ -101,6 +101,13 @@
         (:prefix "C-x"                       ; Use a prefix key
           :i "C-l" #'+company/whole-lines)))
 
+
+(sp-local-pair 'org-mode "=" "=")
+(sp-local-pair 'org-mode "~" "~")
+(sp-local-pair 'org-mode "/" "/")
+(sp-local-pair 'org-mode "*" "*")
+
+;; (sp-local-pair 'org-mode "_" "_")
 ;; change what face is used to display bold (or any other) markup by adding a new entry to org-emphasis-alist
 ;; refer to Font section in Documentation:
 ;; https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org#font
@@ -149,7 +156,11 @@
  '(org-roam-link-current :underline t :weight bold :foreground "salmon"))
 
 
-(setq org-capture-templates
+(after! org
+  ;; https://orgmode.org/manual/Structure-Editing.html#Structure-Editing
+  (setq org-M-RET-may-split-line t)
+
+  (setq org-capture-templates
       '(
         ;; ("a" "Appointment" entry (file  "~/Dropbox/Textnotes/gcal.org" "Appointments")
         ;;  "* TODO %?\n:PROPERTIES:\n\n:END:\nDEADLINE: %^T \n %i\n")
@@ -186,6 +197,11 @@
         ;; ("s" "Screencast" entry (file "~/Dropbox/Textnotes/screencastnotes.org")
         ;;  "* %?\n%i\n")
         ))
+)
+
+
+;; remove spell check auto turn on in org-mode, it casues performance issue when the file is big
+(remove-hook! 'org-mode-hook #'flyspell-mode #'flycheck-mode)
 
 ;; ;; use tabnine
 (use-package! company-tabnine
@@ -230,20 +246,15 @@
     )
 
 
-(sp-local-pair 'org-mode "=" "=")
-(sp-local-pair 'org-mode "~" "~")
-(sp-local-pair 'org-mode "/" "/")
-(sp-local-pair 'org-mode "*" "*")
-;; (sp-local-pair 'org-mode "_" "_")
-
 ;; use org-id for store-link, ref to
 ;; https://stackoverflow.com/questions/27132422/reference-unique-id-across-emacs-org-mode-files
 ;; https://github.com/emacs-helm/helm-org/pull/9
 ;; This allows inserting links based on unique IDs if org-id-link-to-org-use-id is set to t.
 (use-package! org-id)
-;;TODO do i still need this for doom-emacs?
-(setq org-id-link-to-org-use-id t)
-;; update id file on startup
+  ;;TODO do i still need this for doom-emacs? yes!
+  (setq org-id-link-to-org-use-id t)
+;;
+;; ;; update id file on startup
 ;; The .orgids file is in the directory set by `org-directory'
 ;; (org-id-update-id-locations '("~/dropbox/textnotes/machine learning/notes-machine-learning.org"
 ;;                                   "~/dropbox/textnotes/machine learning/notes-machine-learning-projects.org"
@@ -258,3 +269,7 @@
           (org-id-get-with-outline-path-completion)))
 (org-link-set-parameters "id"
                          :complete 'org-id-complete-link)
+
+
+(after! ivy
+  (setq ivy-use-virtual-buffers t))
