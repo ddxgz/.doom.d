@@ -143,10 +143,12 @@
                   '("*" (:weight bold :foreground "#ECBE7B")
                     ))
     (add-to-list 'org-emphasis-alist
-                  '("/" (:slant italic :foreground "#51afef")
+                  ;; '("/" (:slant italic :foreground "#51afef")
+                  '("/" (:slant italic :foreground "lightskyblue")
                     ))
     (add-to-list 'org-emphasis-alist
-                  '("_" (:underline t :foreground "#a9a1e1")
+                  ;; '("_" (:underline t :foreground "#a9a1e1")
+                  '("_" (:underline t :foreground "lightBlue")
                     ))
     )
 
@@ -218,7 +220,7 @@
     ;; :commands (deft)
     :config (setq deft-directory "~/Dropbox/Textnotes/"
                   deft-recursive t
-                  ;; deft-extensions '("md" "org")
+                  deft-extensions '("md" "org")
                   ;; deft-use-filter-string-for-filename t
                   ;; deft-use-filename-as-title nil
                   )
@@ -273,3 +275,41 @@
 
 (after! ivy
   (setq ivy-use-virtual-buffers t))
+
+(use-package! org-ref
+        ;; bibtex
+        :config
+        ;; (setq reftex-default-bibliography '("~/Dropbox/bibliography/library.bib"))
+
+          (setq org-ref-default-bibliography '("~/Dropbox/bibliography/library.bib")
+                org-ref-pdf-directory "~/Dropbox/bibliography/pdfs/"
+                org-ref-bibliography-notes "~/Dropbox/bibliography/biblio-notes.org"
+                ;; org-ref-notes-directory "~/Dropbox/Textnotes/papernotes"
+                )
+
+          ;; If you use helm-bibtex as the citation key completion method you should set these variables too.
+
+          ;; (setq bibtex-completion-bibliography '("~/Dropbox/bibliography/library.bib")
+          (setq bibtex-completion-bibliography org-ref-default-bibliography
+                ;;       bibtex-completion-library-path '("~/Dropbox/bibliography/pdfs", "~/Dropbox/Articles")
+                ;; bibtex-completion-notes-path "~/Dropbox/bibliography/bibtex-notes.org"
+                org-ref-completion-library 'org-ref-ivy-cite
+                )
+
+          ;; open pdf with system pdf viewer (works on mac)
+          (setq bibtex-completion-pdf-open-function
+                (lambda (fpath)
+                  (start-process "open" "*open*" "open" fpath)))
+
+          ;; ;org-ref links are designed to export to the corresponding LaTeX
+          ;; (setq org-latex-pdf-process
+          ;;       '("pdflatex -interaction nonstopmode -output-directory %o %f"
+          ;;         "bibtex %b"
+          ;;         "pdflatex -interaction nonstopmode -output-directory %o %f"
+          ;;         "pdflatex -interaction nonstopmode -output-directory %o %f"))
+
+          ;; (setq reftex-external-file-finders
+          ;;       '(("tex" . "~/Dropbox/bibliography -format=.tex %f")
+          ;;         ("bib" . "~/Dropbox/bibliography -format=.bib %f")))
+       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+)

@@ -46,3 +46,6 @@
 
 ;; install from MELPA as it's actively developing
 (package! org-roam :recipe (:host github :repo "org-roam/org-roam"))
+
+;; (package! helm-bibtex)
+(package! org-ref)
