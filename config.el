@@ -57,9 +57,9 @@
 
 ;;;;
 
-(map! (:map evil-org-mode-map :i "C-d" #'evil-delete-char))
+(map! :map evil-org-mode-map :i "C-d" #'evil-delete-char)
 ;; REVIEW when evil-respect-visual-line-mode improved
-(map! (:map evil-org-mode-map :n "C-c v" #'evil-visual-screen-line))
+(map! :map evil-org-mode-map :n "C-c v" #'evil-visual-screen-line)
 
 ;; for upcase and downcase
 ;; to set it to only in text mode
@@ -97,7 +97,10 @@
         :i "C-@" #'+company/complete
         (:after company
          (:map company-active-map
-          "C-l" #'company-complete-selection))
+          "C-l" #'company-complete-selection
+          "TAB"     #'company-complete-selection
+          [tab]     #'company-complete-selection
+          ))
         (:prefix "C-x"                       ; Use a prefix key
           :i "C-l" #'+company/whole-lines)))
 

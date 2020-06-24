@@ -202,4 +202,4 @@
  )
 
 ;;REVIEW temporal workaround for visual line navigation, track issue https://github.com/hlissner/doom-emacs/issues/401
-(setq evil-respect-visual-line-mode nil)
+(setq evil-respect-visual-line-mode t)
