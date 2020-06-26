@@ -74,6 +74,16 @@
 (map! :map org-mode-map
       "C-c l" #'org-store-link)
 
+(map! :map org-mode-map
+      :localleader
+      "t" nil)
+(map! :map org-mode-map
+      :localleader
+      (:prefix ("t" . "toggle")
+       "x" #'org-latex-preview
+       "e" #'org-toggle-pretty-entities
+       ))
+
 (map! :leader
       :desc "Comment line" "c l" #'comment-line
       :desc "Copy and comment line" "c y" #'evilnc-copy-and-comment-lines
