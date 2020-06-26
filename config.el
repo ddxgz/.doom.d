@@ -57,9 +57,9 @@
 
 ;;;;
 
-(map! :map evil-org-mode-map :i "C-d" #'evil-delete-char)
+(map! :map evil-insert-state-map "C-d" #'evil-delete-char)
 ;; REVIEW when evil-respect-visual-line-mode improved
-(map! :map evil-org-mode-map :n "C-c v" #'evil-visual-screen-line)
+(map! :map org-mode-map :n "C-c v" #'evil-visual-screen-line)
 
 ;; for upcase and downcase
 ;; to set it to only in text mode
@@ -92,6 +92,12 @@
        :desc "notes-machine-learning" "m" (lambda () (interactive)(find-file "~/Dropbox/Textnotes/Machine Learning/notes-machine-learning.org" ))
        :desc "job-notes" "j" (lambda () (interactive)(find-file "~/Dropbox/Textnotes/Job/job-notes.org" ))
        ))
+
+(map! (:when (featurep! :completion helm)
+    (:after helm-files :map (helm-find-files-map helm-read-file-map)
+            "C-h"      #'helm-find-files-up-one-level
+            "C-l"      #'helm-ff-RET
+            )))
 
 (map! (:when (featurep! :completion company) ; Conditional loading
         :i "C-@" #'+company/complete
