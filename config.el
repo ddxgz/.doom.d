@@ -56,10 +56,12 @@
 
 
 ;;;;
-
-(map! :map evil-insert-state-map "C-d" #'evil-delete-char)
+;; (map! :map evil-insert-state-map "C-d" nil)
+;; (map! :map evil-insert-state-map "C-d" #'evil-delete-char)
+(map! :map evil-org-mode-map :i "C-d" #'evil-delete-char)
 ;; REVIEW when evil-respect-visual-line-mode improved
 (map! :map org-mode-map :n "C-c v" #'evil-visual-screen-line)
+(map! :map org-mode-map :n "V" #'evil-visual-line)
 
 ;; for upcase and downcase
 ;; to set it to only in text mode
@@ -121,10 +123,10 @@
           :i "C-l" #'+company/whole-lines)))
 
 
-(sp-local-pair 'org-mode "=" "=")
-(sp-local-pair 'org-mode "~" "~")
-(sp-local-pair 'org-mode "/" "/")
-(sp-local-pair 'org-mode "*" "*")
+;; (sp-local-pair 'org-mode "=" "=")
+;; (sp-local-pair 'org-mode "~" "~")
+;; (sp-local-pair 'org-mode "/" "/")
+;; (sp-local-pair 'org-mode "*" "*")
 
 ;; (sp-local-pair 'org-mode "_" "_")
 ;; change what face is used to display bold (or any other) markup by adding a new entry to org-emphasis-alist
