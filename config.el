@@ -222,6 +222,92 @@
         ))
 )
 
+(use-package! ox-latex
+  :config
+        (setq org-latex-listings 'minted
+              org-latex-packages-alist '(("" "minted"))
+              ;; org-latex-pdf-process
+              ;; '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+              ;;   "bibtex %b"
+              ;;   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+              ;;   "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+              org-latex-pdf-process
+              '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                "bibtex %b"
+                "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+                "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+
+      ;; refer to https://github.com/tkf/org-mode/blob/master/lisp/org-latex.el
+      (with-eval-after-load 'ox-latex
+        (add-to-list 'org-latex-classes
+                     '("awesome-cv"
+                       "\\documentclass{awesome-cv}
+                        [NO-DEFAULT-PACKAGES]
+                        [PACKAGES]
+                        [EXTRA]"
+                       ))
+        (add-to-list 'org-latex-classes
+                     '("bth-thesis"
+                       "\\documentclass{bth-thesis}
+                        [NO-DEFAULT-PACKAGES]
+                        [PACKAGES]
+                        [EXTRA]"
+                       ("\\chapter{%s}" . "\\chapter*{%s}")
+                       ("\\section{%s}" . "\\section*{%s}")
+                       ("\\subsection{%s}" . "\\subsection*{%s}")
+                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                       ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                       ;; ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                       ))
+        (add-to-list 'org-latex-classes
+                     '("mdpi"
+                       "\\documentclass{Definitions/mdpi}
+                        [NO-DEFAULT-PACKAGES]
+                        [PACKAGES]
+                        [EXTRA]"
+                       ("\\section{%s}" . "\\section*{%s}")
+                       ("\\subsection{%s}" . "\\subsection*{%s}")
+                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                       ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                       ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                       ))
+        (add-to-list 'org-latex-classes
+                     '("sagej"
+                       "\\documentclass{sagej}
+                        [NO-DEFAULT-PACKAGES]
+                        [PACKAGES]
+                        [EXTRA]"
+                       ("\\section{%s}" . "\\section*{%s}")
+                       ("\\subsection{%s}" . "\\subsection*{%s}")
+                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                       ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                       ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                       ))
+        (add-to-list 'org-latex-classes
+                     '("elsarticle"
+                       "\\documentclass{elsarticle}
+                        [NO-DEFAULT-PACKAGES]
+                        [PACKAGES]
+                        [EXTRA]"
+                       ("\\section{%s}" . "\\section*{%s}")
+                       ("\\subsection{%s}" . "\\subsection*{%s}")
+                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                       ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                       ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                       ))
+        (add-to-list 'org-latex-classes
+                     '("IEEEtran"
+                       "\\documentclass{IEEEtran}"
+                       ("\\section{%s}" . "\\section*{%s}")
+                       ("\\subsection{%s}" . "\\subsection*{%s}")
+                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                       ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                       ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+                       )))
+
+  )
+
 
 ;; remove spell check auto turn on in org-mode, it casues performance issue when the file is big
 (remove-hook! 'org-mode-hook #'flyspell-mode #'flycheck-mode)
