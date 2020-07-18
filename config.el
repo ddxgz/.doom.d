@@ -37,6 +37,8 @@
 
 
 
+
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -54,6 +56,26 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(setq which-key-idle-delay 0.6)
+(setq evil-ex-substitute-global nil)
+
+;; (defun add-company-tabnine ()
+;;   (add-to-list (make-local-variable 'company-backends) 'company-tabnine))
+
+;; (use-package! company-tabnine
+;;   :config
+;;   (setq company-idle-delay 0
+;;         company-show-numbers t)
+;;   (add-hook! (c-mode-local-vars
+;;               c++-mode-local-vars
+;;               emacs-lisp-mode-local-vars
+;;               python-mode-local-vars)
+;;     #'add-company-tabnine))
+
+(use-package! company-tabnine
+  :after company
+  :config
+  (cl-pushnew 'company-tabnine (default-value 'company-backends)))
 
 ;;;;
 ;; (map! :map evil-insert-state-map "C-d" nil)
@@ -372,7 +394,8 @@
 
 ;; have completion when insert link of id:
 ;; source: https://emacs.stackexchange.com/questions/12391/insert-org-id-link-at-point-via-outline-path-completion
-(defun org-id-complete-link (&optional arg)
+;; (defun org-id-complete-link (&optional arg)
+(defun org-id-complete-link ()
   "Create an id: link using completion"
   (concat "id:"
           (org-id-get-with-outline-path-completion)))
