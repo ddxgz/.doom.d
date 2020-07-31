@@ -85,6 +85,10 @@
 (map! :map org-mode-map :n "C-c v" #'evil-visual-screen-line)
 (map! :map org-mode-map :n "V" #'evil-visual-line)
 
+(map! :map org-mode-map :n "C-c r r" #'helm-org-rifle)
+(map! :map org-mode-map :n "C-c r o" #'helm-org-rifle-org-directory)
+(map! :map org-mode-map :n "C-c r b" #'helm-org-rifle-current-buffer)
+
 ;; for upcase and downcase
 ;; to set it to only in text mode
 ;; (spacemacs/declare-prefix "]" "bracket-prefix")
@@ -112,8 +116,8 @@
       :desc "Comment line" "c l" #'comment-line
       :desc "Copy and comment line" "c y" #'evilnc-copy-and-comment-lines
       :desc "Kill buffer and close window" "w x" #'kill-buffer-and-window
+      :desc "Search buffer (Helm)" "s b" #'swiper-helm
       )
-
 
 (map! (:prefix-map ("C-c f" . "File shortcuts")
        :desc "quicknote" "q" (lambda () (interactive)(find-file "~/Dropbox/Textnotes/quicknote.org" ))
@@ -125,6 +129,8 @@
        :desc "course notes" "c" (lambda () (interactive)(find-file "~/Dropbox/Textnotes/courses/course notes.org" ))
        :desc "notes-machine-learning" "m" (lambda () (interactive)(find-file "~/Dropbox/Textnotes/Machine Learning/notes-machine-learning.org" ))
        :desc "job-notes" "j" (lambda () (interactive)(find-file "~/Dropbox/Textnotes/Job/job-notes.org" ))
+       :desc "cards" "c" (lambda () (interactive)(find-file "~/Dropbox/Textnotes/cards.org" ))
+       :desc "programming" "g" (lambda () (interactive)(find-file "~/Dropbox/Textnotes/programming/programming.org" ))
        ))
 
 (map! (:when (featurep! :completion helm)
@@ -443,3 +449,4 @@
           ;;         ("bib" . "~/Dropbox/bibliography -format=.bib %f")))
        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
+

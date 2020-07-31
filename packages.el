@@ -49,3 +49,5 @@
 
 ;; (package! helm-bibtex)
 (package! org-ref)
+
+(package! helm-org-rifle)
