@@ -14,6 +14,7 @@
 ;;      Alternatively, press 'gd' (or 'C-c g d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
+
 (doom! :input
        ;;chinese
        ;;japanese
@@ -145,6 +146,7 @@
         +hugo            ; use Emacs for hugo blogging
         +jupyter        ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
+        ;; +pretty
         ;; +roam
         ;;+pomodoro        ; be fruitful with the tomato technique
         +present)        ; using org-mode for presentations
@@ -186,11 +188,17 @@
        ;; :private
        ;; pcx-org
        )
+
+;;REVIEW temporal workaround for visual line navigation, track issue https://github.com/hlissner/doom-emacs/issues/401
+(setq evil-respect-visual-line-mode t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+;; (menu-bar-mode -1)
+
  '(custom-safe-themes
    (quote
     ("bbb2b9b5d248ef6666abe409a58b75024121de77c27df09f188bfc29d8384433" default))))
@@ -200,6 +208,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;;REVIEW temporal workaround for visual line navigation, track issue https://github.com/hlissner/doom-emacs/issues/401
-(setq evil-respect-visual-line-mode t)

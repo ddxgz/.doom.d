@@ -18,7 +18,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 14)
+(setq doom-font (font-spec :family "monospace" :size 18)
       ;; doom-variable-pitch-font (font-spec :family "sans" :size 13)
       )
 
@@ -34,7 +34,6 @@
 ;; If you want to change the style of line numbers, change this to `relative' or
 ;; `nil' to disable it:
 (setq display-line-numbers-type 'relative)
-
 
 
 
@@ -150,6 +149,9 @@
         (:prefix "C-x"                       ; Use a prefix key
           :i "C-l" #'+company/whole-lines)))
 
+
+(after! spell-fu
+  (setq spell-fu-idle-delay 1.5))  ; default is 0.25
 
 ;; (sp-local-pair 'org-mode "=" "=")
 ;; (sp-local-pair 'org-mode "~" "~")
@@ -450,3 +452,7 @@
        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 )
 
+
+
+;; (setq menu-bar-mode nil)
+;; (menu-bar-mode -1)
