@@ -213,6 +213,8 @@
   ;; https://orgmode.org/manual/Structure-Editing.html#Structure-Editing
   (setq org-M-RET-may-split-line t)
 
+  (setq org-list-demote-modify-bullet nil)
+
   (setq org-capture-templates
       '(
         ;; ("a" "Appointment" entry (file  "~/Dropbox/Textnotes/gcal.org" "Appointments")
