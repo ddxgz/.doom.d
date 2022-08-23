@@ -80,7 +80,7 @@
        :checkers
        syntax              ; tasing you for every semicolon you forget
        spell             ; tasing you for misspelling mispelling
-       ;; grammar           ; tasing grammar mistake every you make
+       grammar           ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
@@ -141,6 +141,8 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
+        +toc-org
+        +org-cliplink
         +dragndrop       ; drag & drop files/images into org buffers
         +hugo            ; use Emacs for hugo blogging
         +jupyter        ; ipython/jupyter support for babel

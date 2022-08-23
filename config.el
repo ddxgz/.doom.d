@@ -184,6 +184,8 @@
 ;;     ("~" (:background "deep sky blue" :foreground "MidnightBlue"))
 ;;     ("+" (:strike-through t))
 ;;     ))
+;;
+
 (use-package! org
   :defer t
   :config
@@ -199,12 +201,17 @@
                   ;; '("_" (:underline t :foreground "#a9a1e1")
                   '("_" (:underline t :foreground "lightBlue")
                     ))
+    ;;
+    ;; If you find that using a different bullet for a sub-list—than that
+    ;; used for the current list-level—improves readability, customize the
+    ;; variable org-list-demote-modify-bullet.
+    (setq org-list-demote-modify-bullet nil)
     )
 
 
-(custom-set-faces!
- '(org-roam-link :underline t :weight bold :foreground "salmon")
- '(org-roam-link-current :underline t :weight bold :foreground "salmon"))
+;; (custom-set-faces!
+;;  '(org-roam-link :underline t :weight bold :foreground "salmon")
+;;  '(org-roam-link-current :underline t :weight bold :foreground "salmon"))
 
 
 (after! org
@@ -338,7 +345,7 @@
 
 
 ;; remove spell check auto turn on in org-mode, it casues performance issue when the file is big
-(remove-hook! 'org-mode-hook #'flyspell-mode #'flycheck-mode)
+;; (remove-hook! 'org-mode-hook #'flyspell-mode #'flycheck-mode)
 
 ;; ;; use tabnine
 (use-package! company-tabnine
@@ -361,26 +368,26 @@
                   )
     )
 
-;; REVIEW when the option added by roam https://github.com/org-roam/org-roam/issues/507
-(setq org-roam-open-buffer-on-find-file nil)
-(use-package! org-roam
-    :custom
-    (org-roam-directory "~/Dropbox/Textnotes/")
-    (org-roam-index-file "~/Dropbox/Textnotes/org-roam/index.org")
-    ;; (org-roam-link-title-format "[[%s]]")
-    (org-roam-tag-sources '(prop last-directory))
-    (org-roam-capture-templates '(("d" "default" plain (function org-roam--capture-get-point)
-                                 "%?"
-                                 :file-name "org-roam/%<%Y%m%d%H%M%S>-${slug}"
-                                 :head "#+title: ${title}\n#+roam_alias:\n#+roam_tags:\n"
-                                 :unnarrowed t)))
-    (org-roam-ref-capture-templates
-          '(("r" "ref" plain (function org-roam-capture--get-point)
-             "%?"
-             :file-name "webpages/${slug}"
-             :head "#+ROAM_KEY: ${ref}\n#+TITLE: ${title}\n\n- source :: ${ref}"
-             :unnarrowed t)))
-    )
+;; ;; REVIEW when the option added by roam https://github.com/org-roam/org-roam/issues/507
+;; (setq org-roam-open-buffer-on-find-file nil)
+;; (use-package! org-roam
+;;     :custom
+;;     (org-roam-directory "~/Dropbox/Textnotes/")
+;;     (org-roam-index-file "~/Dropbox/Textnotes/org-roam/index.org")
+;;     ;; (org-roam-link-title-format "[[%s]]")
+;;     (org-roam-tag-sources '(prop last-directory))
+;;     (org-roam-capture-templates '(("d" "default" plain (function org-roam--capture-get-point)
+;;                                  "%?"
+;;                                  :file-name "org-roam/%<%Y%m%d%H%M%S>-${slug}"
+;;                                  :head "#+title: ${title}\n#+roam_alias:\n#+roam_tags:\n"
+;;                                  :unnarrowed t)))
+;;     (org-roam-ref-capture-templates
+;;           '(("r" "ref" plain (function org-roam-capture--get-point)
+;;              "%?"
+;;              :file-name "webpages/${slug}"
+;;              :head "#+ROAM_KEY: ${ref}\n#+TITLE: ${title}\n\n- source :: ${ref}"
+;;              :unnarrowed t)))
+;;     )
 
 
 ;; use org-id for store-link, ref to
